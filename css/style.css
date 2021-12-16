@@ -199,7 +199,6 @@ input[type="number"] {
 	width:340px;
 }
 .register_account form select{
-	width:360px;
 	color:#666;
 }
 .register_account form input[type="text"].code{
