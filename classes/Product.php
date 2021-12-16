@@ -42,21 +42,9 @@
 		}
 
 	public function getAllProduct(){
-		$query = "SELECT p.*,c.catName,b.brandName
-		FROM tbl_product as p, tbl_category as c,tbl_brand as b
-		WHERE p.catId = c.catId AND p.brandId = b.brandId
-		order by p.id desc";
-
-/*
-		$query = "SELECT tbl_product.*, tbl_category.catName, tbl_brand.brandName
-		FROM tbl_product
-		INNER JOIN tbl_category
-		ON tbl_product.catId = tbl_category.catId
-		INNER JOIN tbl_brand
-		ON tbl_product.brandId = tbl_brand.brandId
-		 ORDER BY tbl_product.id DESC";
-*/
-
+		$query = "SELECT product.*
+		FROM tbl_product as product
+		order by product.id desc";
 		$result = $this->db->select($query);
 		return $result;
 		}
