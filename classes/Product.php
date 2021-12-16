@@ -82,12 +82,6 @@
 		public function delProductById($id){
 			$query = "SELECT * from tbl_product where id = '$id'";
 			$getdata = $this->db->select($query);
-			if ($getdata) {
-				while ($delImg = $getdata->fetch_assoc() ) {
-					$dellink =  $delImg['image'];
-					unlink($dellink);
-				}
-			}
 
 			$delquery = "DELETE from tbl_product
 			 where id = '$id'";
