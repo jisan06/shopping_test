@@ -10,11 +10,11 @@
                     foreach ($products as $product){
                 ?>
                     <div class="col-md-3 my-3">
-                        <a href="details.php?proid=<?php echo $product['id']; ?>">
+                        <a href="checkout.php?proid=<?php echo $product['id']; ?>">
                             <?php echo $product['name']; ?>
                         </a>
                         <br>
-                        <a href="details.php?proid=<?php echo $product['id']; ?>" class="btn btn-success">
+                        <a href="checkout.php?proid=<?php echo $product['id']; ?>" class="btn btn-success">
                             Buy Now
                         </a>
                     </div>
