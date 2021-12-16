@@ -11,6 +11,7 @@
     $db = new Database();
     $fm = new Format();
     $pd = new Product();
+    $customer = new Customer();
 ?>
 
 <?php
