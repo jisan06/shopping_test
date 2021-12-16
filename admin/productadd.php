@@ -5,7 +5,7 @@
 <?php
 $pd = new Product();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $insertProduct = $pd->productInsert($_POST, $_FILES);
+    $insertProduct = $pd->productInsert($_POST);
 }
 ?>
 

@@ -12,34 +12,30 @@
 		private $fm;
 		public $locations;
 
-	public function __construct()
-		{
+	public function __construct(){
 			$this->db = new Database();
 			$this->fm = new Format();
 		}
 
-	public function productInsert($data, $file){
+	public function productInsert($data){
 		$name = $this->fm->validation($data['name']);
 		$price = mysqli_real_escape_string($this->db->link, $data['price']);
 		$location = mysqli_real_escape_string($this->db->link, $data['location']);
 		if ($name == "" || $price == ""  || $location == "") {
 			$msg = "<span class='error'>Field must not be empty</span>";
 				return $msg;
+		}else{
+		  $query = "INSERT INTO tbl_product(name,price, location) VALUES('$name','$price', '$location')";
+		  $productinsert = $this->db->insert($query);
+			if ($productinsert) {
+				$msg = "<span class='success'>Product Inserted Successfully..</span>";
+				return $msg;
+			}else{
+				$msg = "<span class='error'>Product Not Inserted..</span>";
+				return $msg;
 			}
-		else{
-			  $query = "INSERT INTO tbl_product(name,price, location) VALUES('$name','$price', '$location')";
-			  $productinsert = $this->db->insert($query);
-				if ($productinsert) {
-					$msg = "<span class='success'>Product Inserted Successfully..</span>";
-					return $msg;
-				}else{
-					$msg = "<span class='error'>Product Not Inserted..</span>";
-					return $msg;	
-				}
 		}
-
-
-		}
+	}
 
 	public function getAllProduct(){
 		$query = "SELECT product.*
@@ -55,91 +51,32 @@
 			return $result;
 		}
 
-		public function productUpdate($data,$file, $id){
-
+		public function productUpdate($data, $id){
 			$name = $this->fm->validation($data['name']);
-			$catId      = mysqli_real_escape_string($this->db->link, $data['catId']);
-			$brandId = mysqli_real_escape_string($this->db->link, $data['brandId']);
-			$body 	 = mysqli_real_escape_string($this->db->link, $data['body']);
-			$price 		= mysqli_real_escape_string($this->db->link, $data['price']);
-			$type 		 = mysqli_real_escape_string($this->db->link, $data['type']);
+			$price = mysqli_real_escape_string($this->db->link, $data['price']);
+			$location = mysqli_real_escape_string($this->db->link, $data['location']);
 
-			$permited  = array('jpg', 'jpeg', 'png', 'gif');
-			$file_name = $file['image']['name'];
-			$file_size = $file['image']['size'];
-			$file_temp = $file['image']['tmp_name'];
-
-			$div = explode('.', $file_name);
-			$file_ext = strtolower(end($div));
-			$unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
-			$uploaded_image = "uploads/".$unique_image;
-
-			if ($name == "" || $catId == "" || $brandId == "" || $body == "" || $price == "" || $type == "") {
-			$msg = "<span class='error'>Field must not be empty</span>";
+			if ($name == "" || $price == ""  || $location == "") {
+				$msg = "<span class='error'>Field must not be empty</span>";
 				return $msg;
 			}else{
-				if (!empty($file_name)) {
+				$query = "UPDATE tbl_product
+				set
+				name = '$name',
+				price = '$price',
+				location = '$location'
+				where id = '$id'
+				";
 
-					if ($file_size >1048567) {
-					echo "<span class='error'>Image Size should be less then 1MB!
-					</span>";
-					} elseif (in_array($file_ext, $permited) === false) {
-					echo "<span class='error'>You can upload only:-"
-					.implode(', ', $permited)."</span>";
-					}
-					else{
-					 move_uploaded_file($file_temp, $uploaded_image);
-
-					  $query = "UPDATE tbl_product
-					  set
-					  name = '$name',
-					  catId  	   = '$catId',
-					  brandId      = '$brandId',
-					  body 		   = '$body',
-					  price 	   = '$price',
-					  image 	   = '$uploaded_image',
-					  type 		   = '$type'
-					  where id = '$id'
-
-					  ";
-
-					  $productupdate = $this->db->update($query);
-						if ($productupdate) {
-							$msg = "<span class='success'>Product Updated Successfully..</span>";
-							return $msg;
-						}else{
-							$msg = "<span class='error'>Product Not Updated..</span>";
-							return $msg;	
-						}
-					}
-
-			}else{
-
-				  $query = "UPDATE tbl_product
-				  set
-				  name = '$name',
-				  catId  	   = '$catId',
-				  brandId      = '$brandId',
-				  body 		   = '$body',
-				  price 	   = '$price',
-				  type 		   = '$type'
-				  where id = '$id'
-
-				  ";
-
-				  $productupdate = $this->db->update($query);
-					if ($productupdate) {
-						$msg = "<span class='success'>Product Updated Successfully..</span>";
-						return $msg;
-					}else{
-						$msg = "<span class='error'>Product Not Updated..</span>";
-						return $msg;	
-					}
+				$productupdate = $this->db->update($query);
+				if ($productupdate) {
+					$msg = "<span class='success'>Product Updated Successfully..</span>";
+					return $msg;
+				}else{
+					$msg = "<span class='error'>Product Not Updated..</span>";
+					return $msg;
 				}
-
-
 			}
-
 		}
 
 		public function delProductById($id){
