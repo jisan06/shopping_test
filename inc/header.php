@@ -8,8 +8,9 @@
 		include_once "classes/".$class.".php";
 	});
 
-	$db = new Database();
-	$fm = new Format();
+    $db = new Database();
+    $fm = new Format();
+    $pd = new Product();
 ?>
 
 <?php
@@ -35,6 +36,7 @@
 <script type="text/javascript" src="js/nav-hover.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script type="text/javascript">
   $(document).ready(function($){
     $('#dc_mega-menu-orange').dcMegaMenu({rowItems:'4',speed:'fast',effect:'fade'});
