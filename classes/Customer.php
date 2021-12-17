@@ -75,6 +75,23 @@
 				return $msg;
 			}
 		}
+
+		public function getCustomerData($id){
+			$query = "SELECT * from tbl_customer where id = '$id' ";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+		public function orderProduct($data,$customerId){
+			$productId = $data['productId'];
+			$price = $data['price'];
+			$discount = $data['discount'];
+			$amount = $data['amount'];
+			$query = "INSERT INTO tbl_order(customerId, productId, price, discount,amount) VALUES('$customerId','$productId','$price','$discount', '$amount')";
+
+			$insertrow = $this->db->insert($query);
+			header("Location:success.php");
+		}
 	}
 
 ?>
