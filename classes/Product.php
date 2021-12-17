@@ -36,9 +36,10 @@
 	}
 
 	public function getAllProduct(){
-		$query = "SELECT product.*
+		$query = "SELECT product.*, count(tbl_order.id) as total_order
 		FROM tbl_product as product
-		order by product.id desc";
+		left join tbl_order ON tbl_order.productId = product.id
+		GROUP BY product.id ";
 		$result = $this->db->select($query);
 		return $result;
 		}

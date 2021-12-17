@@ -30,6 +30,7 @@
 					<th>Product Name</th>
 					<th>Price</th>
 					<th>Location</th>
+					<th>Total Order</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -47,6 +48,7 @@
 					<td><?php echo $result['name']; ?></td>
 					<td><?php echo $result['price']; ?></td>
 					<td><?php echo $result['location']; ?></td>
+					<td><?php echo $result['total_order']; ?></td>
 					<td><a href="productedit.php?productid=<?php echo $result['id']; ?>">Edit</a> || <a onclick="return confirm('Are you sure want to delete!')" href="?delproduct=<?php echo $result['id']; ?>">Delete</a></td>
 
 			<?php } } ?>
