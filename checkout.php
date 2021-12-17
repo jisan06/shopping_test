@@ -17,8 +17,9 @@
     $discount = 0;
     if($customer_data['location'] === $product['location']){
         $discount = ($product['price'] *25) / 100;
-        $total = $product['price'] - $discount;
     }
+
+    $total = $product['price'] - $discount;
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $insertOrder = $customer->orderProduct($_POST,$customerId);
