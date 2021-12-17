@@ -51,13 +51,20 @@
             $customerId = Session::get("customerId");
             Session::destroy();
         }
+        $login = Session::get('custlogin');
     ?>
     <div class="menu">
         <ul id="dc_mega-menu-orange" class="dc_mm-orange">
             <li><a href="index.php">Home</a></li>
+            <?php
+                if ($login == true) {
+            ?>
+                <li>
+                    <a href="orderdetails.php">Order List</a>
+                </li>
+            <?php } ?>
             <li>
                 <?php
-                    $login = Session::get('custlogin');
                     if ($login == false) {
                 ?>
                     <a href="login.php">Login</a>

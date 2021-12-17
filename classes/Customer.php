@@ -92,6 +92,15 @@
 			$insertrow = $this->db->insert($query);
 			header("Location:success.php");
 		}
+
+		public function getOrederdProduct($customerId){
+			$query = "SELECT tbl_order.*, tbl_product.name as productName from tbl_order
+			INNER JOIN tbl_product 
+			ON tbl_order.productId = tbl_product.id
+			where customerId = '$customerId' order by id desc ";
+			$result = $this->db->select($query);
+			return $result;
+		}
 	}
 
 ?>
