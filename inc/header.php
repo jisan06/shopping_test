@@ -8,8 +8,10 @@
 		include_once "classes/".$class.".php";
 	});
 
-	$db = new Database();
-	$fm = new Format();
+    $db = new Database();
+    $fm = new Format();
+    $pd = new Product();
+    $customer = new Customer();
 ?>
 
 <?php
@@ -35,6 +37,7 @@
 <script type="text/javascript" src="js/nav-hover.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script type="text/javascript">
   $(document).ready(function($){
     $('#dc_mega-menu-orange').dcMegaMenu({rowItems:'4',speed:'fast',effect:'fade'});
@@ -48,13 +51,20 @@
             $customerId = Session::get("customerId");
             Session::destroy();
         }
+        $login = Session::get('custlogin');
     ?>
     <div class="menu">
         <ul id="dc_mega-menu-orange" class="dc_mm-orange">
             <li><a href="index.php">Home</a></li>
+            <?php
+                if ($login == true) {
+            ?>
+                <li>
+                    <a href="orderdetails.php">Order List</a>
+                </li>
+            <?php } ?>
             <li>
                 <?php
-                    $login = Session::get('custlogin');
                     if ($login == false) {
                 ?>
                     <a href="login.php">Login</a>
