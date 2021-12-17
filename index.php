@@ -14,6 +14,8 @@
                             <?php echo $product['name']; ?>
                         </a>
                         <br>
+                            <span>$<?php echo $product['price']; ?></span>
+                        <br>
                         <a href="checkout.php?productId=<?php echo $product['id']; ?>" class="btn btn-success">
                             Buy Now
                         </a>
