@@ -16,6 +16,7 @@
                             <th>Customer</th>
 							<th>Product</th>
 							<th>Amount</th>
+							<th>Status</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -32,6 +33,7 @@
                                 <td><?php echo $result['customerName']; ?></td>
                                 <td><?php echo $result['productName']; ?></td>
                                 <td>$<?php echo $result['amount']; ?></td>
+                                <td><?php echo $result['status']; ?></td>
                                 <td>
                                     <a href="orderDetails.php?orderId=<?php echo $result['id']; ?>">
                                         View Details

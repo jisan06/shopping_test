@@ -10,6 +10,8 @@
 		
 		private $db;
 		private $fm;
+
+		const status = ['Submitted','In Transit','Delivered'];
 		
 	public function __construct()
 		{
@@ -37,6 +39,23 @@
 			where tbl_order.id = '$id' order by id desc ";
 			$result = $this->db->select($query);
 			return $result;
+		}
+
+		public function statusUpdate($data, $id){
+			$status = mysqli_real_escape_string($this->db->link, $data['status']);
+			$query = "UPDATE tbl_order
+			set
+			status = '$status'
+			where id = '$id'
+			";
+
+			$status_update = $this->db->update($query);
+			if ($status_update) {
+				header("Location:order.php");
+			}else{
+				$msg = "<span class='error'>Product Not Updated..</span>";
+				return $msg;
+			}
 		}
 	}
 

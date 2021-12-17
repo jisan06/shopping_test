@@ -12,7 +12,7 @@
 
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        echo "<script>window.location = 'inbox.php'</script>";
+        $status_update = $order->statusUpdate($_POST, $_GET['orderId']);
     }
 ?>
         <div class="grid_10">
@@ -67,6 +67,16 @@
                             <td>
                                 <select name="status" id="">
                                     <option value="">Select Status</option>
+                                    <?php
+                                        foreach (Order::status as $status){
+                                            if($result['status'] == $status){
+                                                $selected = 'selected';
+                                            }else{
+                                                $selected = '';
+                                            }
+                                    ?>
+                                        <option value="<?php echo $status?>" <?php echo $selected?>><?php echo $status?></option>
+                                    <?php } ?>
                                 </select>
                             </td>
                         </tr>
