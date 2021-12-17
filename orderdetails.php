@@ -30,8 +30,6 @@
                             $getOrder = $customer->getOrederdProduct($customerId);
                             if ($getOrder) {
                                 $i = 0;
-                                $sum = 0;
-                                $qty = 0;
                                 while ($result = $getOrder->fetch_assoc() ) {
                                     $i++;
                         ?>
